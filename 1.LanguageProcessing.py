@@ -60,3 +60,16 @@ print(fdist1['whale'])
 fdist1.plot(50, cumulative=True)
 
 # %%
+list(fdist1.items())[0:5]
+
+# %%
+fdist1.freq('monstrous')
+
+# %%
+# Total number of samples
+fdist1.N()
+
+# %%
+fdist1
+
+# %%
