@@ -6,6 +6,7 @@ emma = nltk.corpus.gutenberg.words('austen-emma.txt')
 # %%
 len(emma)
 
+
 # %%
 emma = nltk.Text(nltk.corpus.gutenberg.words('austen-emma.txt'))
 emma.concordance("surprize")
@@ -85,5 +86,30 @@ print(cfd.conditions())
 print(cfd['news'])
 print(cfd['romance'])
 # print(list(cfd['romance']))
+
+# %%
+days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+cfd.tabulate(samples=days)
+# cfd.plot()
+# %%
+sent = ['In', 'the', 'beginning', 'God', 'created', 'the', 'heaven', 'and', 'the', 'earth', '.']
+print(nltk.bigrams(sent).__next__())
+
+# %%
+from nltk.corpus import stopwords
+stopwords.words('english')
+# %%
+import nltk
+def content_fraction(text):
+    stopwords = nltk.corpus.stopwords.words('english')
+    content = [w for w in text if w.lower() not in stopwords]
+    return len(content) / len(text)
+content_fraction(nltk.corpus.reuters.words())
+
+# %%
+puzzle_letters = nltk.FreqDist('egivrvonl')
+obligatory = 'r'
+wordlist = nltk.corpus.words.words()
+[w for w in wordlist if len(w) >= 6 and obligatory in w and nltk.FreqDist(w) <= puzzle_letters]
 
 # %%
