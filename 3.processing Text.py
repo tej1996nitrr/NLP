@@ -68,4 +68,7 @@ print([porter.stem(t) for t in tokens])
 print([lancaster.stem(t) for t in tokens])
 
 # %%
- 
+wnl = nltk.WordNetLemmatizer()
+[wnl.lemmatize(t) for t in tokens]
+
+# %%
