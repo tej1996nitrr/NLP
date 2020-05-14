@@ -113,3 +113,20 @@ wordlist = nltk.corpus.words.words()
 [w for w in wordlist if len(w) >= 6 and obligatory in w and nltk.FreqDist(w) <= puzzle_letters]
 
 # %%
+from nltk.corpus import wordnet as wn
+wn.synsets('motorcar') #synset or “synonym set,”
+print(wn.synset('car.n.01').lemma_names)
+wn.synset('car.n.01').definition
+wn.synsets('car')
+# %%
+motorcar = wn.synset('car.n.01')
+types_of_motorcar = motorcar.hyponyms()
+types_of_motorcar[26]
+# sorted([lemma.name for synset in types_of_motorcar for lemma in synset.lemmas])
+# %%
+wn.synset('whale.n.02').min_depth()
+
+# %%
+wn.lemma('supply.n.02.supply').antonyms()
+wn.lemma('rush.v.01.rush').antonyms()
+# %%
