@@ -73,10 +73,47 @@ nltk.corpus.indian.tagged_words()
 
 # %%
 # most common tags in the news category of the Brown Corpus
-from nltk.corpus import brown
-brown_news_tagged = brown.tagged_words(categories='news', simplify_tags=True)
-tag_fd = nltk.FreqDist(tag for (word, tag) in brown_news_tagged)
-tag_fd.keys()
+alice = nltk.corpus.gutenberg.words('carroll-alice.txt')
+vocab = nltk.FreqDist(alice)
+v1000 = list(vocab)[:1000]
+mapping = nltk.defaultdict(lambda: 'UNK')
+for v in v1000:
+    mapping[v] = v
+alice2 = [mapping[v] for v in alice]
+alice2[:100]
+# %%
+len(set(alice2))
 
+# %%
+from nltk.corpus import brown
+counts = nltk.defaultdict(int)
+pos = nltk.defaultdict(lambda: nltk.defaultdict(int))
+brown_news_tagged = brown.tagged_words(categories='news')
+for (word, tag) in brown.tagged_words(categories='news'):
+    counts[tag] += 1
+
+# %%
+counts['NP']
+
+# %%
+brown_tagged_sents = brown.tagged_sents(categories='news')
+brown_sents = brown.sents(categories='news')
+#default tagger
+"""Default taggers assign their tag to every single word, even words that have never been
+encountered before. once we have processed several thousand words of
+English text, most new words will be nouns.
+this method performs rather poorly. On a typical corpus, it will tag
+only about an eighth of the tokens correctly"""
+tags = [tag for (word, tag) in brown.tagged_words(categories='news')]
+nltk.FreqDist(tags).max()
+
+# %%
+raw = 'I do not like green eggs and ham, I do not like them Sam I am!'
+tokens = nltk.word_tokenize(raw)
+default_tagger = nltk.DefaultTagger('NN')
+default_tagger.tag(tokens)
+
+# %%
+default_tagger.evaluate(brown_tagged_sents)
 
 # %%
