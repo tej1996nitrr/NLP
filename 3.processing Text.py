@@ -72,3 +72,26 @@ wnl = nltk.WordNetLemmatizer()
 [wnl.lemmatize(t) for t in tokens]
 
 # %%
+raw = """'When I'M a Duchess,' she said to herself, (not in a very hopeful tone
+ though), 'I won't have any pepper in my kitchen AT ALL. Soup does very
+ well without--Maybe it's always pepper that makes people hot-tempered,'..."""
+re.split(r' ', raw)
+
+# %%
+# The regular expression «[ \t\n]+» matches one or more spaces
+re.split(r'[ \t\n]+', raw)
+re.split(r'\W+', raw)
+re.findall(r'\w+|\S\w*', raw)
+# %%
+print (re.findall(r"\w+(?:[-']\w+)*|'|[-.(]+|\S\w*", raw))
+
+# %%
+# \D Any non-digit character (equivalent to [^0-9])
+# \s Any whitespace character (equivalent to [ \t\n\r\f\v]
+# \S Any non-whitespace character (equivalent to [^ \t\n\r\f\v])
+# \w Any alphanumeric character (equivalent to [a-zA-Z0-9_])
+# \W Any non-alphanumeric character (equivalent to [^a-zA-Z0-9_])
+# \t The tab character
+# \n The newline character
+
+# %%
