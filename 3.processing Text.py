@@ -58,3 +58,14 @@ wsj = sorted(set(nltk.corpus.treebank.words()))
 [w for w in wsj if re.search('(ed|ing)$', w)]
 
 # %%
+raw = """DENNIS: Listen, strange women lying in ponds distributing swords
+ is no basis for a system of government. Supreme executive power derives from
+ a mandate from the masses, not from some farcical aquatic ceremony."""
+porter = nltk.PorterStemmer()
+lancaster = nltk.LancasterStemmer()
+tokens = nltk.word_tokenize(raw)
+print([porter.stem(t) for t in tokens])
+print([lancaster.stem(t) for t in tokens])
+
+# %%
+ 
