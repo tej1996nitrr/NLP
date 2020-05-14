@@ -117,3 +117,18 @@ default_tagger.tag(tokens)
 default_tagger.evaluate(brown_tagged_sents)
 
 # %%
+patterns = [
+ (r'.*ing$', 'VBG'), # gerunds
+ (r'.*ed$', 'VBD'), # simple past
+ (r'.*es$', 'VBZ'), # 3rd singular present
+ (r'.*ould$', 'MD'), # modals
+ (r'.*\'s$', 'NN$'), # possessive nouns
+ (r'.*s$', 'NNS'), # plural nouns
+ (r'^-?[0-9]+(.[0-9]+)?$', 'CD'), # cardinal numbers
+ (r'.*', 'NN') # nouns (default)
+ ]
+regexp_tagger = nltk.RegexpTagger(patterns)
+regexp_tagger.tag(brown_sents[3])
+regexp_tagger.evaluate(brown_tagged_sents)
+
+# %%
