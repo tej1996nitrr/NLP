@@ -15,4 +15,5 @@ A Repo for fundamentals/basics for natural language processing using nltk. This 
 
 ## Running Code:
 1. Clone or download the repo.
-2. We have many code cells in the .py files, we can run them to view step by step output
+2. We have many code cells in the .py files, we can run them to view step by step output.
+3. Or run the jupyter notebook version (.ipynb) in google colab or local jupyter notebook/lab.
