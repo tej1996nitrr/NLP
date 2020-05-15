@@ -1,6 +1,6 @@
 # NLP
 Natural language processing using nltk.
-A Repo for fundamentals/basics for natural language processing using nltk. This includes basics of topics like corpora, text processing, tagging, entity recognition, scrapping.
+A Repo for fundamentals/basics for natural language processing using nltk. This includes basics of topics like corpora, text processing, tagging, entity recognition, scrapping. WIll include nltk projects in future.
 
 ## Requirements:
  1. Python 3
