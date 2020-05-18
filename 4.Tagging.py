@@ -132,3 +132,16 @@ regexp_tagger.tag(brown_sents[3])
 regexp_tagger.evaluate(brown_tagged_sents)
 
 # %%
+# The Lookup Tagger
+import nltk
+from nltk.corpus import brown
+fd  = nltk.FreqDist(brown.words(categories='news'))
+cfd = nltk.ConditionalFreqDist(brown.tagged_words(categories='news'))
+cfd
+# print(cfd.conditions())
+# print(cfd['news'])
+most_freq_words = fd.keys()
+likely_tags = dict((word, cfd[word].max()) for word in most_freq_words)
+baseline_tagger = nltk.UnigramTagger(model=likely_tags)
+baseline_tagger.evaluate(brown_tagged_sents)
+# %%
