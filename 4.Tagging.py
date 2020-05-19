@@ -96,6 +96,7 @@ for (word, tag) in brown.tagged_words(categories='news'):
 counts['NP']
 
 # %%
+
 brown_tagged_sents = brown.tagged_sents(categories='news')
 brown_sents = brown.sents(categories='news')
 #default tagger
@@ -144,4 +145,41 @@ most_freq_words = fd.keys()
 likely_tags = dict((word, cfd[word].max()) for word in most_freq_words)
 baseline_tagger = nltk.UnigramTagger(model=likely_tags)
 baseline_tagger.evaluate(brown_tagged_sents)
+# %%
+#N-Gram tagging
+#training a unigram tagger, used it to tag a sentence, and then evaluate
+from nltk.corpus import brown
+brown_tagged_sents = brown.tagged_sents(categories='news')
+brown_sents = brown.sents(categories='news')
+unigram_tagger = nltk.UnigramTagger(brown_tagged_sents)
+unigram_tagger.tag(brown_sents[2004])
+
+brown_sents[0]
+brown_tagged_sents[0]
+unigram_tagger.evaluate(brown_tagged_sents)
+# %%
+"""A tagger that simply memorized its
+training data and made no attempt to construct a general model would get a perfect
+score, but would be useless for tagging new text. Instead, we should split the data,
+training on 90% and testing on the remaining 10%"""
+size = int(len(brown_tagged_sents) * 0.9)
+print(size)
+
+train_sents = brown_tagged_sents[:size]
+test_sents = brown_tagged_sents[size:]
+unigram_tagger = nltk.UnigramTagger(train_sents)
+unigram_tagger.evaluate(test_sents)
+
+# %%
+"""An n-gram tagger is a generalization of a unigram tagger whose context is the current
+word together with the part-of-speech tags of the n-1 preceding tokens"""
+bigram_tagger = nltk.BigramTagger(train_sents)
+bigram_tagger.tag(brown_sents[2007])
+
+# %%
+bigram_tagger.evaluate(test_sents) #Its overall accuracy score is very low:
+"""As n gets larger, the specificity of the contexts increases, as does the chance that the
+data we wish to tag contains contexts that were not present in the training data. This
+is known as the sparse data problem,"""
+
 # %%
