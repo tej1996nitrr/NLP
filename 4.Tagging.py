@@ -28,6 +28,9 @@ WH     wh determiner              who, which, when, what, where, how
 
 """
 import nltk
+import nltk
+from nltk.corpus import brown
+
 text = nltk.word_tokenize("And now for something completely different")
 nltk.pos_tag(text)
 
@@ -85,7 +88,6 @@ alice2[:100]
 len(set(alice2))
 
 # %%
-from nltk.corpus import brown
 counts = nltk.defaultdict(int)
 pos = nltk.defaultdict(lambda: nltk.defaultdict(int))
 brown_news_tagged = brown.tagged_words(categories='news')
@@ -134,8 +136,6 @@ regexp_tagger.evaluate(brown_tagged_sents)
 
 # %%
 # The Lookup Tagger
-import nltk
-from nltk.corpus import brown
 fd  = nltk.FreqDist(brown.words(categories='news'))
 cfd = nltk.ConditionalFreqDist(brown.tagged_words(categories='news'))
 cfd
@@ -148,7 +148,6 @@ baseline_tagger.evaluate(brown_tagged_sents)
 # %%
 #N-Gram tagging
 #training a unigram tagger, used it to tag a sentence, and then evaluate
-from nltk.corpus import brown
 brown_tagged_sents = brown.tagged_sents(categories='news')
 brown_sents = brown.sents(categories='news')
 unigram_tagger = nltk.UnigramTagger(brown_tagged_sents)
