@@ -1,6 +1,16 @@
 #%%
 #electronic books
 import nltk
+from nltk.corpus import gutenberg
+from nltk.corpus import webtext
+from nltk.corpus import nps_chat
+from nltk.corpus import brown
+from nltk.corpus import reuters
+from nltk.corpus import inaugural
+import matplotlib.pyplot as plt
+from nltk.corpus import stopwords
+from nltk.corpus import wordnet as wn
+
 nltk.corpus.gutenberg.fileids()
 emma = nltk.corpus.gutenberg.words('austen-emma.txt')
 # %%
@@ -13,7 +23,6 @@ emma.concordance("surprize")
 
 # %%
 #Gutenberg Corpus
-from nltk.corpus import gutenberg
 """average word length, average sentence
 length, and the number of times each vocabulary item appears in the text on
 average ( lexical diversity score)."""
@@ -29,18 +38,15 @@ macbeth_sentences = gutenberg.sents('shakespeare-macbeth.txt')
 print(macbeth_sentences)
 
 # %%
-from nltk.corpus import webtext
 for fileid in webtext.fileids():
     print( fileid, webtext.raw(fileid)[:65], '...')
 
 # %%
 #Web and Chat Text
-from nltk.corpus import nps_chat
 chatroom = nps_chat.posts('10-19-20s_706posts.xml')
 chatroom[0]
 # %%
 #Brown Corpus
-from nltk.corpus import brown
 brown.categories()
 news = brown.words(categories='news')
 fdist = nltk.FreqDist([w.lower() for w in news])
@@ -55,7 +61,6 @@ cfd.tabulate(conditions=genres, samples=modals)
 
 # %%
 #Reuters Corpus
-from nltk.corpus import reuters
 reuters.fileids()
 reuters.categories()
 reuters.categories('training/9865')
@@ -64,11 +69,9 @@ reuters.fileids('barley')
 reuters.words('training/9865')[:14] #words or sentences we want in terms of files or categories
 # %%
 #Inaugural Address Corpus
-from nltk.corpus import inaugural
 inaugural.fileids()
 [fileid[:4] for fileid in inaugural.fileids()]
 # %%
-import matplotlib.pyplot as plt 
 cfd = nltk.ConditionalFreqDist((target, fileid[:4]) for fileid in inaugural.fileids() for w in inaugural.words(fileid) for target in ['america', 'citizen'] if w.lower().startswith(target))
 cfd.plot()
 
@@ -96,10 +99,9 @@ sent = ['In', 'the', 'beginning', 'God', 'created', 'the', 'heaven', 'and', 'the
 print(nltk.bigrams(sent).__next__())
 
 # %%
-from nltk.corpus import stopwords
 stopwords.words('english')
 # %%
-import nltk
+
 def content_fraction(text):
     stopwords = nltk.corpus.stopwords.words('english')
     content = [w for w in text if w.lower() not in stopwords]
@@ -113,7 +115,6 @@ wordlist = nltk.corpus.words.words()
 [w for w in wordlist if len(w) >= 6 and obligatory in w and nltk.FreqDist(w) <= puzzle_letters]
 
 # %%
-from nltk.corpus import wordnet as wn
 wn.synsets('motorcar') #synset or “synonym set,”
 print(wn.synset('car.n.01').lemma_names)
 wn.synset('car.n.01').definition
